@@ -24,7 +24,7 @@ func run(runner Runner, cmd *exec.Cmd) (int, error) {
 		return 1, err
 	}
 	cmd.Path = path
-	cmd.Args = append([]string{"stdbuf", "-oL"}, cmd.Args...)
+	cmd.Args = append([]string{"stdbuf", "-oL", "-i0"}, cmd.Args...)
 
 	cmd.Stdin = os.Stdin
 
