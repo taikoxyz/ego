@@ -17,6 +17,15 @@ import (
 
 // run launches an application with a CappedBuffer and also translates potential Edgeless RT / Open Enclave errors into more user-friendly ones.
 func run(runner Runner, cmd *exec.Cmd) (int, error) {
+	// force line buffering for stdout
+	// otherwise it will be fully buffered because our stdout is not a tty
+	path, err := exec.LookPath("stdbuf")
+	if err != nil {
+		return 1, err
+	}
+	cmd.Path = path
+	cmd.Args = append([]string{"stdbuf", "-oL"}, cmd.Args...)
+
 	cmd.Stdin = os.Stdin
 
 	// capture stdout and stderr
