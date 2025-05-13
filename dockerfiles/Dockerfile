@@ -12,10 +12,10 @@ RUN apt-get install -y --no-install-recommends \
   wget
 
 ARG erttag=v0.4.9
-ARG egotag=v1.7.0
+ARG egotag=taiko
 RUN wget -qO- https://go.dev/dl/go1.23.5.linux-amd64.tar.gz | tar -C /usr/local -xz \
   && git clone -b $erttag --depth=1 https://github.com/edgelesssys/edgelessrt \
-  && git clone -b $egotag --depth=1 https://github.com/edgelesssys/ego \
+  && git clone -b $egotag --depth=1 https://github.com/taikoxyz/ego \
   && mkdir ertbuild egobuild
 
 # install ert
